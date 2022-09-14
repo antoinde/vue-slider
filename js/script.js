@@ -1,7 +1,18 @@
 // Antonello's code. Git-Hub: antoinde
 
 console.log("JavaScript is working properly! =) Let's code!");
-
+/*
+Partendo dal markup in allegato, rifare lo slider ma questa volta usando Vue. 
+Potete tenere sott'occhio la versione fatta in plain JS come riferimento.
+Bonus:
+1- al click su una thumb, visualizzare in grande l'immagine corrispondente
+2- applicare l'autoplay allo slider: ogni 3 secondi, cambia immagine automaticamente
+3- quando il mouse va in hover sullo slider, bloccare l'autoplay e farlo riprendere quando esce
+Consigli del giorno:
+- regola d'oro: riciclare ovunque possibile! Questo significa che per la parte di markup possiamo recuperare html e css dell'esercizio svolto qualche giorno fa: è già tutto pronto!
+- il riciclo spesso va a braccetto con le funzioni! Sapendole sfruttare bene, l'esercizio si riduce a poche righe ;)
+- ora abbiamo diversi strumenti in più nelle nostre tasche, che possono tornarci utili per svolgere l'esercizio in una versione più evoluta ed efficace, soprattutto per quando riguarda la struttura dei dati, sfruttiamoli al meglio!
+*/
 const slides = [
     {
         image: 'img/01.jpg',
@@ -31,3 +42,32 @@ const slides = [
 ];
 
 console.log(slides);
+
+const app = new Vue ({
+    el: '#app',
+    data: {
+        activeIndex: 0,
+        slides
+    },
+    methods: {
+        showPreviousImage: function() {
+            console.log("showPreviousImage");
+            if(this.activeIndex >0){
+                this.activeIndex--;
+            }
+            else{
+                this.activeIndex = this.slides.length -1;
+            }
+        },
+
+        showNextImage: function() {
+            console.log("showNextImage");
+            if(this.activeIndex === this.slides.length -1){
+                this.activeIndex = 0;
+            }
+            else{
+                this.activeIndex++;
+            }
+        }
+    }
+});
